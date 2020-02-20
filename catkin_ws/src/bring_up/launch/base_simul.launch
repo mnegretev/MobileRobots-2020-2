@@ -1,0 +1,10 @@
+<launch>
+  <param name="robot_description" textfile="$(find robotino_description)/robotino.urdf" />
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher"/>
+  <node pkg="tf" type="static_transform_publisher" name="laser_base" args="0 0 0.23 0 0 0 base_link laser_link 30" />
+  
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find config_files)/rviz/getting_started.rviz"/>
+  <node name="rotombot_gui" pkg="rotombot_gui" type="rotombot_gui" output="screen"/>
+  
+  <node name="base_simul" pkg="base_simul" type="base_simul.py" output="screen"/>
+</launch>
