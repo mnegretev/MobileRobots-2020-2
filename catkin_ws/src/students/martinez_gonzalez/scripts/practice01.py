@@ -33,18 +33,21 @@ def main():
     pub_speeds = rospy.Publisher("/rotombot/hardware/motor_speeds", Float32MultiArray, queue_size=10)
     loop = rospy.Rate(20)
     listener = tf.TransformListener()
+    msg = Float32MultiArray()
 
     while not rospy.is_shutdown():
         #
         # TODO:
         # Declare a Float32MultiArray message and assign the appropiate speeds:
         # [sl, sr] where sl is the left tire speed and sr, the right tire speed, both in m/s
+	msg.data = [0.1, 0.1]
         # Calculate the speeds to move the robot describing a 2mx2m square.
         # You can do it in open or closed loop. For the latter case, you can use the
         # get_robot_pose function to get the current robot configuration.
         # Publish the message.
         # You can declare as many variables as you need.
         #
+	pub_speeds.publish(msg)
         loop.sleep()
 
 
