@@ -45,6 +45,8 @@ def main():
         # Publish the message.
         # You can declare as many variables as you need.
         #
+        msgToSend = Float32MultiArray()
+        msgToSend.data = [0.5, 0.5]
         loop.sleep()
 
 
