@@ -35,6 +35,9 @@ def main():
     listener = tf.TransformListener()
 
     while not rospy.is_shutdown():
+        
+        msg = Float32MultiArray()
+        msg.data = [1 1]
         #
         # TODO:
         # Declare a Float32MultiArray message and assign the appropiate speeds:
