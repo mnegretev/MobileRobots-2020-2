@@ -33,6 +33,10 @@ def main():
     pub_speeds = rospy.Publisher("/rotombot/hardware/motor_speeds", Float32MultiArray, queue_size=10)
     loop = rospy.Rate(20)
     listener = tf.TransformListener()
+    
+    msg = Float32MultiArray()
+
+    
 
     while not rospy.is_shutdown():
         #
@@ -45,6 +49,9 @@ def main():
         # Publish the message.
         # You can declare as many variables as you need.
         #
+        msg.data=[2,1]
+	pub_speeds.publish(msg)
+	
         loop.sleep()
 
 
