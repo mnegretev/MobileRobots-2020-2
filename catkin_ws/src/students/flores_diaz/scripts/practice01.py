@@ -9,10 +9,11 @@
 #
 
 import rospy
+import time
 import tf
 from std_msgs.msg import Float32MultiArray
 
-NAME = "APELLIDO_PATERNO_APELLIDO_MATERNO"
+NAME = "Flores_Diaz"
 
 def get_robot_pose(listener):
     try:
@@ -28,7 +29,7 @@ def get_robot_pose(listener):
     return None
 
 def main():
-    print "PRACTICE 01 - " + NAME
+    print "PRACTICE 01 - Flores Diaz" 
     rospy.init_node("practice01")
     pub_speeds = rospy.Publisher("/rotombot/hardware/motor_speeds", Float32MultiArray, queue_size=10)
     loop = rospy.Rate(20)
@@ -45,6 +46,54 @@ def main():
         # Publish the message.
         # You can declare as many variables as you need.
         #
+        #actividad
+        time.sleep(1)
+        print "avanza"
+        msg=Float32MultiArray()
+        msg.data=[0.5,0.5]
+        pub_speeds.publish(msg)
+        time.sleep(3)
+        print "vuelta der"
+        msg.data=[0.5,-0.5]
+        pub_speeds.publish(msg)
+        time.sleep(0.65)
+        print "avanza"
+        msg=Float32MultiArray()
+        msg.data=[0.5,0.5]
+        pub_speeds.publish(msg)
+        time.sleep(3)
+        print "vuelta der"
+        msg=Float32MultiArray()
+        msg.data=[0.5,-0.5]
+        pub_speeds.publish(msg)
+        time.sleep(0.65)
+        print "avanza"
+        msg=Float32MultiArray()
+        msg.data=[0.5,0.5]
+        pub_speeds.publish(msg)
+        time.sleep(3)
+        print "vuelta der"
+        msg.data=[0.5,-0.5]
+        pub_speeds.publish(msg)
+        time.sleep(0.65)
+        print "avanza"
+        msg=Float32MultiArray()
+        msg.data=[0.5,0.5]
+        pub_speeds.publish(msg)
+        time.sleep(3)
+        print "vuelta der"
+        msg=Float32MultiArray()
+        msg.data=[0.5,-0.5]
+        pub_speeds.publish(msg)
+        time.sleep(0.65)
+        print "detiene"
+        msg=Float32MultiArray()
+        msg.data=[0,0]
+        pub_speeds.publish(msg)
+        time.sleep(10)
+
+
+
         loop.sleep()
 
 
