@@ -12,7 +12,7 @@ import rospy
 import tf
 from std_msgs.msg import Float32MultiArray
 
-NAME = "APELLIDO_PATERNO_APELLIDO_MATERNO"
+NAME = "GOMEZ_CASTRO"
 
 def get_robot_pose(listener):
     try:
@@ -45,7 +45,10 @@ def main():
         # Publish the message.
         # You can declare as many variables as you need.
         #
-        loop.sleep()
+        msg = Float32MultiArray()
+	msg.data = [1.0, 1.0]
+	pub_speeds.publish(msg)
+	loop.sleep()
 
 
 if __name__ == '__main__':
