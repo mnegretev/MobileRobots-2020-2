@@ -12,7 +12,7 @@ import rospy
 import tf
 from std_msgs.msg import Float32MultiArray
 
-NAME = "APELLIDO_PATERNO_APELLIDO_MATERNO"
+NAME = "Rodriguez_Bernal"
 
 def get_robot_pose(listener):
     try:
@@ -33,9 +33,14 @@ def main():
     pub_speeds = rospy.Publisher("/rotombot/hardware/motor_speeds", Float32MultiArray, queue_size=10)
     loop = rospy.Rate(20)
     listener = tf.TransformListener()
-
-    while not rospy.is_shutdown():
-        #
+    msg_motores = Float32MultiArray()
+    counter = 165
+    while not rospy.is_shutdown() and counter>=0:
+        
+        msg_motores.data = [0.5 , 0.5]
+        pub_speeds.publish(msg_motores)
+        counter-= 1
+        
         # TODO:
         # Declare a Float32MultiArray message and assign the appropiate speeds:
         # [sl, sr] where sl is the left tire speed and sr, the right tire speed, both in m/s
@@ -46,8 +51,99 @@ def main():
         # You can declare as many variables as you need.
         #
         loop.sleep()
+        counter-= 1
+    msg_motores.data = [0.0 , 0.0]
+    pub_speeds.publish(msg_motores)
 
+    counterb = 30
+    while not rospy.is_shutdown() and counterb >=0:
+        
+        msg_motores.data = [-0.5 , 0.5]
+        pub_speeds.publish(msg_motores)
+        counterb-= 1
 
+        loop.sleep()
+        counterb -= 1
+
+    msg_motores.data = [0.0 , 0.0]
+    pub_speeds.publish(msg_motores)
+
+    counterc = 165
+    while not rospy.is_shutdown() and counterc >=0:
+        
+        msg_motores.data = [0.5 , 0.5]
+        pub_speeds.publish(msg_motores)
+        counterc-= 1
+
+        loop.sleep()
+        counterc-= 1
+    msg_motores.data = [0.0 , 0.0]
+    pub_speeds.publish(msg_motores)
+
+    counterd = 30
+    while not rospy.is_shutdown() and counterd >=0:
+        
+        msg_motores.data = [-0.5 , 0.5]
+        pub_speeds.publish(msg_motores)
+        counterd-= 1
+
+        loop.sleep()
+        counterd -= 1
+
+    msg_motores.data = [0.0 , 0.0]
+    pub_speeds.publish(msg_motores)
+
+    countere = 165
+    while not rospy.is_shutdown() and countere >=0:
+        
+        msg_motores.data = [0.5 , 0.5]
+        pub_speeds.publish(msg_motores)
+        countere -= 1
+
+        loop.sleep()
+        countere -= 1
+    msg_motores.data = [0.0 , 0.0]
+    pub_speeds.publish(msg_motores)
+
+    counterf = 30
+    while not rospy.is_shutdown() and counterf >=0:
+        
+        msg_motores.data = [-0.5 , 0.5]
+        pub_speeds.publish(msg_motores)
+        counterf-= 1
+
+        loop.sleep()
+        counterf -= 1
+
+    msg_motores.data = [0.0 , 0.0]
+    pub_speeds.publish(msg_motores)
+
+    counterg = 165
+    while not rospy.is_shutdown() and counterg >=0:
+        
+        msg_motores.data = [0.5 , 0.5]
+        pub_speeds.publish(msg_motores)
+        counterg -= 1
+
+        loop.sleep()
+        counterg-= 1
+    msg_motores.data = [0.0 , 0.0]
+    pub_speeds.publish(msg_motores)
+
+    counterh = 30
+    while not rospy.is_shutdown() and counterh >=0:
+        
+        msg_motores.data = [-0.5 , 0.5]
+        pub_speeds.publish(msg_motores)
+        counterh-= 1
+
+        loop.sleep()
+        counterh -= 1
+
+    msg_motores.data = [0.0 , 0.0]
+    pub_speeds.publish(msg_motores)
+
+    
 if __name__ == '__main__':
     try:
         main()
