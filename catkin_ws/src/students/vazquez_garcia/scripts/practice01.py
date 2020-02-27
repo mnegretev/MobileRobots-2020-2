@@ -12,7 +12,10 @@ import rospy
 import tf
 from std_msgs.msg import Float32MultiArray
 
-NAME = "VAZQUEZ_GARCIA_CARLITOS"
+NAME = "VAZQUEZ_GARCIA"
+
+msg = Float32MultiArray()
+flag = False
 
 def get_robot_pose(listener):
     try:
@@ -27,12 +30,29 @@ def get_robot_pose(listener):
         pass
     return None
 
+def timer_callback(event):
+    global msg,flag
+    rospy.loginfo("In timer callback")
+    if flag:
+        msg.data = [1,1]
+        flag = False
+    else:
+        msg.data = [-0.2,0.2]
+        flag = True
+
+
 def main():
+    global msg
     print "PRACTICE 01 - " + NAME
     rospy.init_node("practice01")
     pub_speeds = rospy.Publisher("/rotombot/hardware/motor_speeds", Float32MultiArray, queue_size=10)
     loop = rospy.Rate(20)
     listener = tf.TransformListener()
+    
+    rospy.Timer(rospy.Duration(2), timer_callback)
+    print('ss')
+
+    msg.data = [0,0]
 
     while not rospy.is_shutdown():
         #
@@ -43,8 +63,8 @@ def main():
         # You can do it in open or closed loop. For the latter case, you can use the
         # get_robot_pose function to get the current robot configuration.
         # Publish the message.
-        # You can declare as many variables as you need.
-        #
+        # You can declare as many variables as you needs
+        pub_speeds.publish(msg)
         loop.sleep()
 
 
