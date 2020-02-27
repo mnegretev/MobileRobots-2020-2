@@ -50,47 +50,46 @@ def main():
         time.sleep(1)
         print "avanza"
         msg=Float32MultiArray()
-        msg.data=[0.5,0.5]
+        msg.data=[0.6,0.6]
         pub_speeds.publish(msg)
         time.sleep(3)
         print "vuelta der"
-        msg.data=[0.5,-0.5]
+        msg.data=[0.8,-0.8]
         pub_speeds.publish(msg)
-        time.sleep(0.65)
+        time.sleep(0.50)
         print "avanza"
-        msg=Float32MultiArray()
-        msg.data=[0.5,0.5]
+        msg.data=[0.6,0.6]
         pub_speeds.publish(msg)
         time.sleep(3)
         print "vuelta der"
-        msg=Float32MultiArray()
-        msg.data=[0.5,-0.5]
+        
+        msg.data=[0.8,-0.8]
         pub_speeds.publish(msg)
-        time.sleep(0.65)
+        time.sleep(0.50)
         print "avanza"
-        msg=Float32MultiArray()
-        msg.data=[0.5,0.5]
+       
+        msg.data=[0.6,0.6]
         pub_speeds.publish(msg)
         time.sleep(3)
         print "vuelta der"
-        msg.data=[0.5,-0.5]
+        msg.data=[0.8,-0.8]
         pub_speeds.publish(msg)
-        time.sleep(0.65)
+        time.sleep(0.50)
         print "avanza"
-        msg=Float32MultiArray()
-        msg.data=[0.5,0.5]
+        
+        msg.data=[0.6,0.6]
         pub_speeds.publish(msg)
         time.sleep(3)
         print "vuelta der"
-        msg=Float32MultiArray()
-        msg.data=[0.5,-0.5]
+        
+        msg.data=[0.8,-0.8]
         pub_speeds.publish(msg)
-        time.sleep(0.65)
+        time.sleep(0.50)
         print "detiene"
-        msg=Float32MultiArray()
+        
         msg.data=[0,0]
         pub_speeds.publish(msg)
-        time.sleep(10)
+        time.sleep(5)
 
 
 
