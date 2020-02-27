@@ -46,8 +46,9 @@ def main():
         # You can declare as many variables as you need.
         #
         msg = Float32MultiArray()
-	msg.data = [1.0, 1.0]
+	msg.data = [0.5, 0.5]
 	pub_speeds.publish(msg)
+	print("[sl = " + string(msg.data[0]) + ", sr= " + string(msg.data[1]))
 	loop.sleep()
 
 
