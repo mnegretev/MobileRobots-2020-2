@@ -12,7 +12,7 @@ import rospy
 import tf
 from std_msgs.msg import Float32MultiArray
 
-NAME = "APELLIDO_PATERNO_APELLIDO_MATERNO"
+NAME = "TOLEDO_RODRIGUEZ"
 
 def get_robot_pose(listener):
     try:
