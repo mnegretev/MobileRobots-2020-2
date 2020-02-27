@@ -33,7 +33,8 @@ def main():
     pub_speeds = rospy.Publisher("/rotombot/hardware/motor_speeds", Float32MultiArray, queue_size=10)
     loop = rospy.Rate(20)
     listener = tf.TransformListener()
-
+	sl=1
+	sr=1
     while not rospy.is_shutdown():
         #
         # TODO:
