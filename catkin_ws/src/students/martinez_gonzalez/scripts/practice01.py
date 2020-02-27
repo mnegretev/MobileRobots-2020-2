@@ -13,6 +13,8 @@ import tf
 from std_msgs.msg import Float32MultiArray
 
 NAME = "MARTINEZ_GONZALEZ_ANDRES_ALFONSO"
+msg = Float32MultiArray()
+rotate = True
 
 def get_robot_pose(listener):
     try:
@@ -27,28 +29,41 @@ def get_robot_pose(listener):
         pass
     return None
 
+def square(event):
+    global rotate, msg
+    if rotate:
+        msg.data = [0,.4]
+        rotate = False
+    else:
+        msg.data = [1,1]
+        rotate = True
+
 def main():
+    global msg
     print "PRACTICE 01 - " + NAME
     rospy.init_node("practice01")
     pub_speeds = rospy.Publisher("/rotombot/hardware/motor_speeds", Float32MultiArray, queue_size=10)
     loop = rospy.Rate(20)
+    msg.data = [0,0]
     listener = tf.TransformListener()
-    msg = Float32MultiArray()
+    #msg = Float32MultiArray()
+    rospy.Timer(rospy.Duration(2), square)
 
     while not rospy.is_shutdown():
         #
         # TODO:
         # Declare a Float32MultiArray message and assign the appropiate speeds:
         # [sl, sr] where sl is the left tire speed and sr, the right tire speed, both in m/s
-	msg.data = [0.1, 0.1]
+	    #msg.data = [0.0001, 0.0001]
+        pub_speeds.publish(msg)
         # Calculate the speeds to move the robot describing a 2mx2m square.
         # You can do it in open or closed loop. For the latter case, you can use the
         # get_robot_pose function to get the current robot configuration.
         # Publish the message.
         # You can declare as many variables as you need.
         #
-	pub_speeds.publish(msg)
-        loop.sleep()
+	    
+        #loop.sleep()
 
 
 if __name__ == '__main__':
