@@ -11,9 +11,12 @@
 import rospy
 import tf
 from std_msgs.msg import Float32MultiArray
-
+#-----------------------------------------------variables---------------------------------------------------------
 NAME = "duron_luna"
 
+cambio = False
+msg = Float32MultiArray()
+#------------------------------------------------------FUNCIONES--------------------------------------------------
 def get_robot_pose(listener):
     try:
         (trans, rot) = listener.lookupTransform('odom', 'base_link', rospy.Time(0))
@@ -26,16 +29,36 @@ def get_robot_pose(listener):
     except:
         pass
     return None
+#---------------------------------------------------------------------------------------------------------------
+
+def cuadrado(loop):
+
+	global msg,cambio
+
+	if cambio == True:
+		msg.data=[1,1]
+		cambio = False
+
+	else:
+		msg.data=[0.2,-0.2]
+		cambio = True
+
+#------------------------------------------------------------------------------------------------------------
 
 def main():
     print "PRACTICE 01 - " + NAME
     rospy.init_node("practice01")
     pub_speeds = rospy.Publisher("/rotombot/hardware/motor_speeds", Float32MultiArray, queue_size=10)
-    loop = rospy.Rate(20)
-    listener = tf.TransformListener()
-    msg = Float32MultiArray()
+    loop = rospy.Rate(0.5)
 
+    listener = tf.TransformListener()
+    global cambio
+    
+    
+    msg.data =[0,0]
+    print "Cambia"
     while not rospy.is_shutdown():
+        cuadrado(loop)
         #
         # TODO:
         # Declare a Float32MultiArray message and assign the appropiate speeds:
@@ -46,11 +69,16 @@ def main():
         # Publish the message.
         # You can declare as many variables as you need.
         #
-        msg.data = [2,2]
         pub_speeds.publish(msg)
         loop.sleep()
+        cambio=True
+        cuadrado(loop)
+        pub_speeds.publish(msg)
+        loop.sleep()
+        cambio=False
 
 
+#================================================="MAIN"=============================================================
 if __name__ == '__main__':
     try:
         main()
