@@ -12,7 +12,7 @@ import rospy
 import tf
 from std_msgs.msg import Float32MultiArray
 
-NAME = "Hernandez_Abad"
+NAME = "Hernandez_Abad_Liber_Adrian"
 
 def get_robot_pose(listener):
     try:
@@ -27,6 +27,15 @@ def get_robot_pose(listener):
         pass
     return None
 
+def route(event):
+    global msg,flag
+    if flag:
+        msg.data=[1,1]
+        flag=False
+    else:
+        msg.data=[-0.2,0.2]
+        flag=True
+
 def main():
     print "PRACTICE 01 - " + NAME
     rospy.init_node("practice01")
@@ -34,9 +43,11 @@ def main():
     loop = rospy.Rate(20)
     listener = tf.TransformListener()
     
+    global msg,flag
+    flag=False
     msg = Float32MultiArray()
-
-    
+    msg.data=[0,0]
+    rospy.Timer(rospy.Duration(2),route)
 
     while not rospy.is_shutdown():
         #
@@ -49,9 +60,8 @@ def main():
         # Publish the message.
         # You can declare as many variables as you need.
         #
-        msg.data=[2,1]
-	pub_speeds.publish(msg)
-	
+        #msg.data=[2,1]
+        pub_speeds.publish(msg)	
         loop.sleep()
 
 
@@ -60,5 +70,3 @@ if __name__ == '__main__':
         main()
     except rospy.ROSInterruptException:
         pass
-    
-
