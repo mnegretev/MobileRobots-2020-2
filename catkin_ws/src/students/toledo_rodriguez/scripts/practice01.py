@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 #
 # AUTONOMOUS MOBILE ROBOTS - UNAM, FI, 2020-2
-# PRACTICE 1 - THE PLATFORM ROS 
+# PRACTICE 1 - THE PLATFORM ROS
 #
 # Instructions:
 # Write a program to move the robot along a path describing a 2mx2m square.
@@ -33,6 +33,9 @@ def main():
     pub_speeds = rospy.Publisher("/rotombot/hardware/motor_speeds", Float32MultiArray, queue_size=10)
     loop = rospy.Rate(20)
     listener = tf.TransformListener()
+    msg_motores = Float32MultiArray()
+
+    counter = 70
 
     while not rospy.is_shutdown():
         #
@@ -45,7 +48,28 @@ def main():
         # Publish the message.
         # You can declare as many variables as you need.
         #
-        loop.sleep()
+        #robot_now = get_robot_pose(listener)
+        #print("hola" + robot_now)
+
+        #avanza
+        while counter >= 0:
+            msg_motores.data = [0.5 , 0.5]
+            pub_speeds.publish(msg_motores)
+            loop.sleep()
+            counter -= 1
+            pass
+        #GIRO la derecha
+        count2 = 15
+        while count2 >= 0:
+            msg_motores.data = [0.5 , -0.5]
+            pub_speeds.publish(msg_motores)
+            loop.sleep()
+            count2 -= 1
+            pass
+
+        counter = 70
+        #count2 = 30
+
 
 
 if __name__ == '__main__':
@@ -53,5 +77,3 @@ if __name__ == '__main__':
         main()
     except rospy.ROSInterruptException:
         pass
-    
-
