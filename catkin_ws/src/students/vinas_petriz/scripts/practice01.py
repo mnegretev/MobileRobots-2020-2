@@ -10,7 +10,10 @@
 
 import rospy
 import tf
+import time
+import math
 from std_msgs.msg import Float32MultiArray
+from geometry_msgs.msg import Twist
 
 NAME = "VIÑAS_PETRIZ"
 
@@ -66,7 +69,7 @@ def main():
                 print(angActual, angInicial, angInicial + math.pi/2)
                 if angActual > angInicial + math.pi/2:
                     print("Entro")
-                    angInicial = angActual -
+                    angInicial = angActual - 0.05
                     linear = True
                     msg.data = [0, 0]
                     startTime = timeActual
