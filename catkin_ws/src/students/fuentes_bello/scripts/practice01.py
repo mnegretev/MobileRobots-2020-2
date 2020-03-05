@@ -10,7 +10,10 @@
 
 import rospy
 import tf
+import time
 from std_msgs.msg import Float32MultiArray
+
+speed = Float32MultiArray()
 
 NAME = "Fuentes Bello David"
 
@@ -28,11 +31,14 @@ def get_robot_pose(listener):
     return None
 
 def main():
+    global speed
     print "PRACTICE 01 - " + NAME
     rospy.init_node("practice01")
     pub_speeds = rospy.Publisher("/rotombot/hardware/motor_speeds", Float32MultiArray, queue_size=10)
     loop = rospy.Rate(20)
     listener = tf.TransformListener()
+
+    speed.data = [0.0, 0.0]
 
     while not rospy.is_shutdown():
         #
@@ -45,6 +51,14 @@ def main():
         # Publish the message.
         # You can declare as many variables as you need.
         #
+	
+	speed.data = [1.0, 1.0]
+	pub_speeds.publish(speed)
+	time.sleep(2)
+	speed.data = [-1.0, 1.0]
+	pub_speeds.publish(speed)
+	time.sleep(0.4)
+	
         loop.sleep()
 
 
