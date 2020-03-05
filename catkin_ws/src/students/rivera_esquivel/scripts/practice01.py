@@ -45,7 +45,19 @@ def main():
         # Publish the message.
         # You can declare as many variables as you need.
         #
-        loop.sleep()
+
+	msg=Float32MultiArray()
+
+	for i in range(0, 40):
+		msg.data=[1, 1]
+		pub_speeds.publish(msg)
+		loop.sleep()
+	
+	for i in range(0, 40):
+		msg.data=[-0.196, 0.196]
+		pub_speeds.publish(msg)
+		loop.sleep()
+	
 
 
 if __name__ == '__main__':
