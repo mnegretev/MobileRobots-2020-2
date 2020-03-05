@@ -27,17 +27,8 @@ def get_robot_pose(listener):
         pass
     return None
 
-def main():
-    print "PRACTICE 01 - " + NAME
-    rospy.init_node("practice01")
-    pub_speeds = rospy.Publisher("/rotombot/hardware/motor_speeds", Float32MultiArray, queue_size=10)
-    loop = rospy.Rate(20)
-    listener = tf.TransformListener()
-	sl=1
-	sr=1
-    while not rospy.is_shutdown():
         #
-        # TODO:
+        # TODO
         # Declare a Float32MultiArray message and assign the appropiate speeds:
         # [sl, sr] where sl is the left tire speed and sr, the right tire speed, both in m/s
         # Calculate the speeds to move the robot describing a 2mx2m square.
@@ -46,8 +37,89 @@ def main():
         # Publish the message.
         # You can declare as many variables as you need.
         #
-        loop.sleep()
 
+def main():
+    print "PRACTICE 01 - " + NAME
+    rospy.init_node("practice01")
+    pub_speeds = rospy.Publisher("/rotombot/hardware/motor_speeds", Float32MultiArray, queue_size=10)
+    loop = rospy.Rate(20)
+    listener = tf.TransformListener()
+    msg= Float32MultiArray()
+    tfwd = 80
+    tturn = 15
+    sl = 0.5
+    sr = 0.5
+	
+    while not rospy.is_shutdown() and tfwd >= 0:
+	msg.data = [sl,sr]
+	pub_speeds.publish(msg)
+        loop.sleep()
+	tfwd = tfwd - 1
+	msg.data = [0,0]
+	pub_speeds.publish(msg)
+
+    while not rospy.is_shutdown() and tturn >= 0:
+	msg.data = [-sl,sr]
+	pub_speeds.publish(msg)
+        loop.sleep()
+	tturn = tturn - 1
+	msg.data = [0,0]
+	pub_speeds.publish(msg)
+	tfwd = 80
+	
+    while not rospy.is_shutdown() and tfwd >= 0:
+	msg.data = [sl,sr]
+	pub_speeds.publish(msg)
+        loop.sleep()
+	tfwd = tfwd - 1
+	msg.data = [0,0]
+	pub_speeds.publish(msg)
+	tturn = 15
+
+    while not rospy.is_shutdown() and tturn >= 0:
+	msg.data = [-sl,sr]
+	pub_speeds.publish(msg)
+        loop.sleep()
+	tturn = tturn - 1
+	msg.data = [0,0]
+	pub_speeds.publish(msg)
+	tfwd = 80
+
+    while not rospy.is_shutdown() and tfwd >= 0:
+	msg.data = [sl,sr]
+	pub_speeds.publish(msg)
+        loop.sleep()
+	tfwd = tfwd - 1
+	msg.data = [0,0]
+	pub_speeds.publish(msg)
+	tturn = 15
+
+    while not rospy.is_shutdown() and tturn >= 0:
+	msg.data = [-sl,sr]
+	pub_speeds.publish(msg)
+        loop.sleep()
+	tturn = tturn - 1
+	msg.data = [0,0]
+	pub_speeds.publish(msg)
+	tfwd = 80
+
+    while not rospy.is_shutdown() and tfwd >= 0:
+	msg.data = [sl,sr]
+	pub_speeds.publish(msg)
+        loop.sleep()
+	tfwd = tfwd - 1
+	msg.data = [0,0]
+	pub_speeds.publish(msg)
+	tturn = 15
+
+    while not rospy.is_shutdown() and tturn >= 0:
+	msg.data = [-sl,sr]
+	pub_speeds.publish(msg)
+        loop.sleep()
+	tturn = tturn - 1
+	msg.data = [0,0]
+	pub_speeds.publish(msg)
+	tfwd = 80
 
 if __name__ == '__main__':
     try:
