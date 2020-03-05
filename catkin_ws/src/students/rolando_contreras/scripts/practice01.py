@@ -27,14 +27,6 @@ def get_robot_pose(listener):
         pass
     return None
 
-def main():
-    print "PRACTICE 01 - " + NAME
-    rospy.init_node("practice01")
-    pub_speeds = rospy.Publisher("/rotombot/hardware/motor_speeds", Float32MultiArray, queue_size=10)
-    loop = rospy.Rate(20)
-    listener = tf.TransformListener()
-
-    while not rospy.is_shutdown():
         #
         # TODO:
         # Declare a Float32MultiArray message and assign the appropiate speeds:
@@ -45,8 +37,102 @@ def main():
         # Publish the message.
         # You can declare as many variables as you need.
         #
-        loop.sleep()
 
+def main():
+    print "PRACTICE 01 - " + NAME
+    rospy.init_node("practice01")
+    pub_speeds = rospy.Publisher("/rotombot/hardware/motor_speeds", Float32MultiArray, queue_size=10)
+    loop = rospy.Rate(20)
+    listener = tf.TransformListener()
+    msgM = Float32MultiArray()
+    rd = 0.5
+    ri = 0.5
+    a = 150
+    b = 30
+    time_move = a
+    time_turn = b
+    
+    while not rospy.is_shutdown() and time_move >=0:
+
+   	msgM.data=[rd,ri]
+    	pub_speeds.publish(msgM)
+   	time_move = time_move - 1
+        loop.sleep()
+        time_move = time_move - 1
+	msgM.data=[0,0]
+	pub_speeds.publish(msgM)
+
+    while not rospy.is_shutdown() and time_turn >=0:
+	msgM.data=[-rd,ri]
+    	pub_speeds.publish(msgM)
+   	time_turn = time_turn - 1
+	loop.sleep()
+	time_turn = time_turn - 1
+        msgM.data=[0,0]
+	pub_speeds.publish(msgM)
+	
+    time_move = a
+    while not rospy.is_shutdown() and time_move >=0:
+
+   	msgM.data=[rd,ri]
+    	pub_speeds.publish(msgM)
+   	time_move = time_move - 1
+        loop.sleep()
+        time_move = time_move - 1
+	msgM.data=[0,0]
+	pub_speeds.publish(msgM)
+
+    time_turn = b
+    while not rospy.is_shutdown() and time_turn >=0:
+	msgM.data=[-rd,ri]
+    	pub_speeds.publish(msgM)
+   	time_turn = time_turn - 1
+	loop.sleep()
+	time_turn = time_turn - 1
+        msgM.data=[0,0]
+	pub_speeds.publish(msgM)
+
+    time_move = a
+    while not rospy.is_shutdown() and time_move >=0:
+
+   	msgM.data=[rd,ri]
+    	pub_speeds.publish(msgM)
+   	time_move = time_move - 1
+        loop.sleep()
+        time_move = time_move - 1
+	msgM.data=[0,0]
+	pub_speeds.publish(msgM)
+	
+    time_turn = b
+    while not rospy.is_shutdown() and time_turn >=0:
+	msgM.data=[-rd,ri]
+    	pub_speeds.publish(msgM)
+   	time_turn = time_turn - 1
+	loop.sleep()
+	time_turn = time_turn - 1
+        msgM.data=[0,0]
+	pub_speeds.publish(msgM)
+
+    time_move = a
+    while not rospy.is_shutdown() and time_move >=0:
+
+   	msgM.data=[rd,ri]
+    	pub_speeds.publish(msgM)
+   	time_move = time_move - 1
+        loop.sleep()
+        time_move = time_move - 1
+	msgM.data=[0,0]
+	pub_speeds.publish(msgM)
+
+    time_turn = b
+    while not rospy.is_shutdown() and time_turn >=0:
+	msgM.data=[-rd,ri]
+    	pub_speeds.publish(msgM)
+   	time_turn = time_turn - 1
+	loop.sleep()
+	time_turn = time_turn - 1
+        msgM.data=[0,0]
+	pub_speeds.publish(msgM)
 
 if __name__ == '__main__':
     try:
