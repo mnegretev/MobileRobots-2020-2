@@ -35,9 +35,43 @@ def main():
     listener = tf.TransformListener()
 
     while not rospy.is_shutdown():
-        
+       
         msg = Float32MultiArray()
-        msg.data = [1 1]
+        msg.data = [0,0] 
+        x, y, angInicial = get_robot_pose(listener)
+
+        if angInicial > math.pi * 2:
+            angInicial -= math.pi * 2
+        if angInicial < 0:
+            angInicial += 2 * math.pi
+        linear = True
+        startTime = time.time()
+        while True == True:
+            timeActual = time.time()
+            if timeActual > startTime + 4:
+                linear = False
+                starTime = timeActual
+            if linear == True:
+                msg.data = [0.5,0.5]
+            else:
+                print(angActual, angInicial)
+                x, y, angActual = get_robot_pose(listener)
+                if angInicial > math.pi * 2:
+                    angInicial -= math.pi * 2
+                if angActual > math.pi * 2:
+                    angActual -= 2 * math.pi
+                if angActual < 0:
+                    angActual += 2 * math.pi
+                if angActual > angInicial + math.pi/2:
+                    print("Entro")
+                    angInicial = angActual - 0.05
+                    linear = True
+                    msg.data = [0, 0]
+                    startTime = timeActual
+                else:
+                    msg.data = [0, 0.4]
+
+            pub_speeds.publish(msg)
         #
         # TODO:
         # Declare a Float32MultiArray message and assign the appropiate speeds:
