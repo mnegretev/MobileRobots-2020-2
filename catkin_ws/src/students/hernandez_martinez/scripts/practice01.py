@@ -10,6 +10,7 @@
 
 import rospy
 import tf
+import time
 from std_msgs.msg import Float32MultiArray
 
 NAME = "HERNANDEZ_MARTINEZ_CINTHIA"
@@ -47,9 +48,16 @@ def main():
         #
 
 	msg_speed=Float32MultiArray()
-	msg_speed.data = [0.5,0.5]
+	msg_speed.data = [0.5,0.5] #Avanza adelante
 	pub_speeds.publish(msg_speed)
+        time.sleep(4)
+
+	msg_speed.data = [0.5,-0.5] #Gira a la derecha
+	pub_speeds.publish(msg_speed)
+	time.sleep(0.8)
+
         loop.sleep()
+
 
 
 if __name__ == '__main__':
