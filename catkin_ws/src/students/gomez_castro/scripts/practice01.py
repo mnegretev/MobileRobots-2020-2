@@ -48,7 +48,11 @@ def main():
         msg = Float32MultiArray()
 	msg.data = [0.5, 0.5]
 	pub_speeds.publish(msg)
-	print("[sl = " + string(msg.data[0]) + ", sr= " + string(msg.data[1]))
+	rospy.sleep(4.)
+		
+	msg.data = [-0.5, 0.5]
+	pub_speeds.publish(msg)
+	rospy.sleep(0.785)
 	loop.sleep()
 
 
