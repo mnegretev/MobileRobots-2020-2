@@ -11,8 +11,9 @@
 import rospy
 import tf
 from std_msgs.msg import Float32MultiArray
+import time
 
-NAME = "APELLIDO_PATERNO_APELLIDO_MATERNO"
+NAME = "Luna_Sabas"
 
 def get_robot_pose(listener):
     try:
@@ -45,13 +46,74 @@ def main():
         # Publish the message.
         # You can declare as many variables as you need.
         #
+	time.sleep(1)
+	print "Avanza"
+	msg=Float32MultiArray()
+	msg.data=[0.6,0.6]
+	pub_speeds.publish(msg)
+	time.sleep(3)
+	print "Vuelta Derecha"
+	msg.data=[0.8,-0.8]
+	pub_speeds.publish(msg)
+	time.sleep(0.50)
+	print "Avanza"	
+	msg.data=[0.6,0.6]
+	pub_speeds.publish(msg)
+	time.sleep(3)
+	print "Vuelta Derecha"
+	msg.data=[0.8,-0.8]
+	pub_speeds.publish(msg)
+	time.sleep(0.50)
         loop.sleep()
-
+	print "Avanza"	
+	msg.data=[0.6,0.6]
+	pub_speeds.publish(msg)
+	time.sleep(3)
+	print "Vuelta Derecha"
+	msg.data=[0.8,-0.8]
+	pub_speeds.publish(msg)
+	time.sleep(0.50)
+	print "Avanza"	
+	msg.data=[0.6,0.6]
+	pub_speeds.publish(msg)
+	time.sleep(3)
+	print "Vuelta Derecha"
+	msg.data=[0.8,-0.8]
+	pub_speeds.publish(msg)
+	time.sleep(0.50)
+	print "Detener"
+	msg.data=[0,0]
+	pub_speeds.publish(msg)
+	time.sleep(3)
+        loop.sleep()
 
 if __name__ == '__main__':
     try:
         main()
     except rospy.ROSInterruptException:
         pass
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     
 
