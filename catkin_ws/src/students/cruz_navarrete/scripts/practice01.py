@@ -7,12 +7,12 @@
 # Write a program to move the robot along a path describing a 2mx2m square.
 # Required publishers and subscribers are already declared and initialized.
 #
-
 import rospy
 import tf
 from std_msgs.msg import Float32MultiArray
+import time
 
-NAME = "APELLIDO_PATERNO_APELLIDO_MATERNO"
+NAME = "CRUZ_NAVARRETE"
 
 def get_robot_pose(listener):
     try:
@@ -34,6 +34,8 @@ def main():
     loop = rospy.Rate(20)
     listener = tf.TransformListener()
 
+
+
     while not rospy.is_shutdown():
         #
         # TODO:
@@ -45,7 +47,19 @@ def main():
         # Publish the message.
         # You can declare as many variables as you need.
         #
+        message = Float32MultiArray()
+        rospy.sleep(1)
+
+        message.data = [0.5, 0.5]
+        pub_speeds.publish(message)
+        rospy.sleep(4.1)
+
+        message.data = [-0.36, 0.36]
+        pub_speeds.publish(message)
+        rospy.sleep(0.1)
+
         loop.sleep()
+
 
 
 if __name__ == '__main__':
@@ -53,5 +67,3 @@ if __name__ == '__main__':
         main()
     except rospy.ROSInterruptException:
         pass
-    
-
