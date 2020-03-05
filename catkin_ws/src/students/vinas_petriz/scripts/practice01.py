@@ -12,7 +12,7 @@ import rospy
 import tf
 from std_msgs.msg import Float32MultiArray
 
-NAME = "APELLIDO_PATERNO_APELLIDO_MATERNO"
+NAME = "VIÑAS_PETRIZ"
 
 def get_robot_pose(listener):
     try:
@@ -35,6 +35,45 @@ def main():
     listener = tf.TransformListener()
 
     while not rospy.is_shutdown():
+        msg = Float32MultiArray()
+        msg.data = [0,0] 
+        x, y, angInicial = get_robot_pose(listener)
+
+        if angInicial > math.pi * 2:
+            angInicial -= math.pi * 2
+        if angInicial < 0:
+            angInicial += 2 * math.pi
+        linear = True
+        startTime = time.time()
+        while True == True:
+            timeActual = time.time()
+            if timeActual > startTime + 4:
+                linear = False
+                starTime = timeActual
+            if linear == True:
+                msg.data = [0.5,0.5]
+            else:
+
+                x, y, angActual = get_robot_pose(listener)
+                if angInicial < 0:
+                    angInicial += 2 * math.pi
+                if angInicial > math.pi * 1.5:
+                    angInicial -= math.pi * 2
+                if angActual < 0:
+                    angActual += 2 * math.pi
+                if angActual > math.pi * 2:
+                    angActual -= 2 * math.pi
+                print(angActual, angInicial, angInicial + math.pi/2)
+                if angActual > angInicial + math.pi/2:
+                    print("Entro")
+                    angInicial = angActual -
+                    linear = True
+                    msg.data = [0, 0]
+                    startTime = timeActual
+                else:
+                    msg.data = [0, 0.4]
+
+            pub_speeds.publish(msg)
         #
         # TODO:
         # Declare a Float32MultiArray message and assign the appropiate speeds:
