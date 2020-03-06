@@ -60,28 +60,27 @@ def main():
 	msg.data=[0.6, 0.6]
         pub_speeds.publish(msg)
 	time.sleep(3)
-
+        #vuelta a la derecha
 	msg.data=[0.8, -0.8]
         pub_speeds.publish(msg)
 	time.sleep(.50)
-        
-        
+        #avanzar
         msg.data=[0.6, 0.6]
         pub_speeds.publish(msg)
 	time.sleep(3)
-
+        #vuelta a la derecha
 	msg.data=[0.8, -0.8]
         pub_speeds.publish(msg)
 	time.sleep(.50)
-
+        #avanzar
         msg.data=[0.6, 0.6]
         pub_speeds.publish(msg)
 	time.sleep(3)
-	
+	#vuelta a la derecha
         msg.data=[0.8, -0.8]
         pub_speeds.publish(msg)
 	time.sleep(.50)
-
+        #detener
 	msg.data=[0.0, 0.0]
         pub_speeds.publish(msg)
 	time.sleep(.5)
