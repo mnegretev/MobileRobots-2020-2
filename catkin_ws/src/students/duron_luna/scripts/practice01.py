@@ -31,17 +31,14 @@ def get_robot_pose(listener):
     return None
 #---------------------------------------------------------------------------------------------------------------
 
-def cuadrado(loop):
-
+def cuadrado():
 	global msg,cambio
 
 	if cambio == True:
 		msg.data=[1,1]
-		cambio = False
-
 	else:
 		msg.data=[0.2,-0.2]
-		cambio = True
+	
 
 #------------------------------------------------------------------------------------------------------------
 
@@ -50,15 +47,12 @@ def main():
     rospy.init_node("practice01")
     pub_speeds = rospy.Publisher("/rotombot/hardware/motor_speeds", Float32MultiArray, queue_size=10)
     loop = rospy.Rate(0.5)
-
     listener = tf.TransformListener()
     global cambio
     
-    
     msg.data =[0,0]
-    print "Cambia"
     while not rospy.is_shutdown():
-        cuadrado(loop)
+        cuadrado()
         #
         # TODO:
         # Declare a Float32MultiArray message and assign the appropiate speeds:
@@ -72,7 +66,7 @@ def main():
         pub_speeds.publish(msg)
         loop.sleep()
         cambio=True
-        cuadrado(loop)
+        cuadrado()
         pub_speeds.publish(msg)
         loop.sleep()
         cambio=False
