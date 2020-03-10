@@ -57,7 +57,7 @@ def main():
 	time.sleep(2)
 	speed.data = [-1.0, 1.0]
 	pub_speeds.publish(speed)
-	time.sleep(0.4)
+	time.sleep(0.39)
 	
         loop.sleep()
 
