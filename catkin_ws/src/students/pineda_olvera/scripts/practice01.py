@@ -10,9 +10,12 @@
 
 import rospy
 import tf
+import math
+import time
 from std_msgs.msg import Float32MultiArray
+#from geometry_msgs.msg import Twist
 
-NAME = "APELLIDO_PATERNO_APELLIDO_MATERNO"
+NAME = "Pineda_Olvera"
 
 def get_robot_pose(listener):
     try:
@@ -28,13 +31,15 @@ def get_robot_pose(listener):
     return None
 
 def main():
-    print "PRACTICE 01 - " + NAME
+    print "PRACTICE 01 Pineda Olvera " 
+    print "iniciando Robot"
     rospy.init_node("practice01")
     pub_speeds = rospy.Publisher("/rotombot/hardware/motor_speeds", Float32MultiArray, queue_size=10)
     loop = rospy.Rate(20)
+    
     listener = tf.TransformListener()
 
-    while not rospy.is_shutdown():
+
         #
         # TODO:
         # Declare a Float32MultiArray message and assign the appropiate speeds:
@@ -45,7 +50,26 @@ def main():
         # Publish the message.
         # You can declare as many variables as you need.
         #
-        loop.sleep()
+
+    while not rospy.is_shutdown():
+
+	msg=Float32MultiArray()
+	
+#vuelta	
+	msg.data=[-.8,.8]
+	pub_speeds.publish(msg)
+	time.sleep(.49)
+#linea recta
+	msg.data=[.6,.6]
+	pub_speeds.publish(msg)
+	time.sleep(3)
+	
+	
+	
+	msg.data=[0,0]	
+	pub_speeds.publish(msg)
+        
+	loop.sleep()
 
 
 if __name__ == '__main__':
@@ -53,5 +77,6 @@ if __name__ == '__main__':
         main()
     except rospy.ROSInterruptException:
         pass
-    
 
+
+    
