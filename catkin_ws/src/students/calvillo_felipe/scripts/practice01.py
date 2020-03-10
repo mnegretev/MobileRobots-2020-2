@@ -33,8 +33,84 @@ def main():
     pub_speeds = rospy.Publisher("/rotombot/hardware/motor_speeds", Float32MultiArray, queue_size=10)
     loop = rospy.Rate(20)
     listener = tf.TransformListener()
+    msgMotor = Float32MultiArray()
+    counter1 = 70
+    counter2 = 15
 
-    while not rospy.is_shutdown():
+    while not rospy.is_shutdown() and counter1 >= 0:
+        msgMotor.data = [0.5,0.5]
+        pub_speeds.publish(msgMotor)
+        loop.sleep()
+        counter1 -= 1
+        msgMotor.data = [0,0]
+        pub_speeds.publish(msgMotor)
+
+    while not rospy.is_shutdown() and counter2 >= 0:
+        msgMotor.data = [-0.5,0.5]
+        pub_speeds.publish(msgMotor)
+        loop.sleep()
+        counter2 -= 1
+        msgMotor.data = [0,0]
+        pub_speeds.publish(msgMotor)
+        counter1 = 70
+
+    while not rospy.is_shutdown() and counter1 >= 0:
+        msgMotor.data = [0.5,0.5]
+        pub_speeds.publish(msgMotor)
+        loop.sleep()
+        counter1 -= 1
+        msgMotor.data = [0,0]
+        pub_speeds.publish(msgMotor)
+        counter2 = 15
+
+    while not rospy.is_shutdown() and counter2 >= 0:
+        msgMotor.data = [-0.5,0.5]
+        pub_speeds.publish(msgMotor)
+        loop.sleep()
+        counter2 -= 1
+        msgMotor.data = [0,0]
+        pub_speeds.publish(msgMotor)
+        counter1 = 70
+
+    while not rospy.is_shutdown() and counter1 >= 0:
+        msgMotor.data = [0.5,0.5]
+        pub_speeds.publish(msgMotor)
+        loop.sleep()
+        counter1 -= 1
+        msgMotor.data = [0,0]
+        pub_speeds.publish(msgMotor)
+        counter2 = 15
+
+    while not rospy.is_shutdown() and counter2 >= 0:
+        msgMotor.data = [-0.5,0.5]
+        pub_speeds.publish(msgMotor)
+        loop.sleep()
+        counter2 -= 1
+        msgMotor.data = [0,0]
+        pub_speeds.publish(msgMotor)
+        counter1 = 70
+
+    while not rospy.is_shutdown() and counter1 >= 0:
+        msgMotor.data = [0.5,0.5]
+        pub_speeds.publish(msgMotor)
+        loop.sleep()
+        counter1 -= 1
+        msgMotor.data = [0,0]
+        pub_speeds.publish(msgMotor)
+        counter2 = 15
+
+    while not rospy.is_shutdown() and counter2 >= 0:
+        msgMotor.data = [-0.5,0.5]
+        pub_speeds.publish(msgMotor)
+        loop.sleep()
+        counter2 -= 1
+        msgMotor.data = [0,0]
+        pub_speeds.publish(msgMotor)
+        counter1 = 70
+
+    
+
+
         #
         # TODO:
         # Declare a Float32MultiArray message and assign the appropiate speeds:
@@ -45,7 +121,7 @@ def main():
         # Publish the message.
         # You can declare as many variables as you need.
         #
-        loop.sleep()
+        
 
 
 if __name__ == '__main__':
