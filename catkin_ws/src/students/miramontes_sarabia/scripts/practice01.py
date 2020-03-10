@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-#
+# -*- coding: utf-8 -*-
 # AUTONOMOUS MOBILE ROBOTS - UNAM, FI, 2020-2
 # PRACTICE 1 - THE PLATFORM ROS 
 #
@@ -10,6 +10,7 @@
 
 import rospy
 import tf
+import time
 from std_msgs.msg import Float32MultiArray
 
 NAME = "MIRAMONTES_SARABIA_LUIS_ENRIQUE"
@@ -33,7 +34,8 @@ def main():
     pub_speeds = rospy.Publisher("/rotombot/hardware/motor_speeds", Float32MultiArray, queue_size=10)
     loop = rospy.Rate(20)
     listener = tf.TransformListener()
-
+    msgToSend = Float32MultiArray()
+    time.sleep(2) #Espero dos segundos, sólo para estar listo
     while not rospy.is_shutdown():
         #
         # TODO:
@@ -45,9 +47,23 @@ def main():
         # Publish the message.
         # You can declare as many variables as you need.
         #
-        msgToSend = Float32MultiArray()
         msgToSend.data = [0.5, 0.5]
+        pub_speeds.publish(msgToSend)
+        time.sleep(4) #Se avanza dos metros en cuatro segundos 
+        msgToSend.data = [-0.5, 0.5]
+        pub_speeds.publish(msgToSend)
+        '''
+        calculando la velocidad angular a partir de la velocidad tangencial y usando 0.5m
+        como diámetro (medido dentro del simulador, a no tener medida entre llantas se
+        uso el diámetro completo del robot) se obtiene una velocidad tangencial de 2rad/s
+        para girar 90° se requiere un giro de 1.57 rad, lo que nos da como resultado
+        un tiempo de giro de 0.785 s, redondeo a 0.79 para mantener congruente el redondeo del diámetro..
+        La medida no es perfecta, después de varias vueltas el robot se comienza a desviar un poco,
+        pero es lo más que me puedo aproximar sin cucharear tiempos y usando matemáticas.
+        '''
+        time.sleep(0.79)
         loop.sleep()
+        #El loop seguirá.
 
 
 if __name__ == '__main__':
