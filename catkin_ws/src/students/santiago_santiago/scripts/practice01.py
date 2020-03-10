@@ -42,10 +42,10 @@ def main():
 
     while not rospy.is_shutdown():
 	
-	speed.data = [1.0, 1.0]
+	vel.motor = [1.0, 1.0]
 	pub_speeds.publish(speed)
 	time.sleep(2)
-	speed.data = [1.0, -1.0]
+	vel.motor = [1.0, -1.0]
 	pub_speeds.publish(speed)
 	time.sleep(0.35)
 	
